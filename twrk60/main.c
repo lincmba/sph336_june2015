@@ -1,20 +1,14 @@
 /*
- * File: main.c
- *
- * Copyright (c) 2015 David Muriuki
- * see the LICENCE file
+ * File
  */
 
 #include "main.h"
 
-int main(void){	
-	//whether to blink LED2
+int main(void)
+	{	
 	//uint8_t blink=1;
-	
-
 	//initialize system
 	SystemInit();
-
 	//initialize UART5 with 8-N-1 settings, 57600 baudrate
 	init_uart(UART5_BASE_PTR,periph_clk_khz,57600);
 
@@ -29,36 +23,45 @@ int main(void){
 	while(1)
 	{
 		//use polling method to echo back data when available
-		if(data_available()){ 
+		if(data_available())
+		{ 
 			byte = uart_read();
-			if(byte==0xD){ 
+			if(byte==0xD)
+			{ 
 				puts((uint8_t *)"\r\n"); //send new line character
 			//0 to 9 ascii code in hexadecimal 
-			}else if ((byte >= 0x30) && (byte <= 0x39)) 
-			{byte = byte - 0x30; display(byte);
+			}
+			else if ((byte >= 0x30) && (byte <= 0x39)) 
+			{
+				byte = byte - 0x30; display(byte);
 			
 			//small case letters a to f ascii code in hexadecimal
-			}else if ((byte >= 0x61) && (byte <= 0x66)){
+			}
+			else if ((byte >= 0x61) && (byte <= 0x66))
+			{
 				byte = byte - 0x57; display(byte);
-				}else if((byte >= 0x41) && (byte <= 0x46)){
-					byte = byte - 0x37; display(byte);
-				}else{
-				
+			}
+			else if((byte >= 0x41) && (byte <= 0x46))
+			{
+				byte = byte - 0x37; display(byte);
+				}
+				else
+				{
+					display(byte);
 				}
 		}
 	}
 }
 
-/*
-	brief  Silly delay
+
 */
 void delay(void)
 {
-  volatile unsigned int i,j;
+  volatile unsigned int x,y;
 
-  for(i=0; i<1000; i++)
+  for(x=0; x<1000; x++)
   {
-	for(j=0; j<300; j++)
+	for(y=0; y<300; y++)
       __asm__("nop");
   }
 }
