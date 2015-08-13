@@ -4,10 +4,30 @@
  * Copyright (c) 2015 David Muriuki
  * see the LICENCE file
  */
-
+#include "Cpu.h"
+#include "Events.h"
+#include "Yellow.h"
+#include "BitIoLdd1.h"
+#include "WAIT1.h"
+#include "TSS1.h"
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
 #include "main.h"
 
 int main(void){	
+		uint8_t x =0;
+	PE_low_level_init();
+	Configure();
+  for(;;) {
+	  TSS_Task();
+	  WAIT1_Waitms(10);
+  }
+	#ifdef PEX_RTOS_START
+    	PEX_RTOS_START();               
+ 	 #endif
+ 	 for(;;){}
 	//whether to blink LED2
 	//uint8_t blink=1;
 	
